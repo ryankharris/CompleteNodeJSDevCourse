@@ -3,8 +3,9 @@ html
     title= title
     link(rel='stylesheet' href='/css/styles.css')
   body
-    h1= message
+    include ../includes/header
     img(src="/img/robotHead.png", alt="Robot Head", class="robot-head")
-    p Created by #{name} (pug interpolation)
+    include ../includes/footer
+    //- p Created by #{name} (pug interpolation)
     //- p= 'Created by ' + name + ' (expression with js concatentation)'
     //- p= `Created by ${name} (expression with js template string)`

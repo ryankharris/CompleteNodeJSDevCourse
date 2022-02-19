@@ -6,3 +6,8 @@ h1 {
 .robot-head {
   width: 200px;
 }
+
+nav ul li {
+  display: inline;
+  margin-right: 5px;
+}
