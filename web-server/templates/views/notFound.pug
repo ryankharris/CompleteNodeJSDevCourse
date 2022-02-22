@@ -1,0 +1,8 @@
+html
+  head
+    title= (parentRoute) ? `${parentRoute} ` : '' + 'Page not found'
+    link(rel='stylesheet' href='/css/styles.css')
+  body
+    include ../includes/header
+    p Please click one of the links above and return to safety
+    include ../includes/footer
