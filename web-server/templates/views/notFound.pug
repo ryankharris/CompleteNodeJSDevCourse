@@ -1,8 +1,11 @@
 html
   head
-    title= (parentRoute) ? `${parentRoute} ` : '' + 'Page not found'
+    title= (parentRoute ? `${parentRoute} ` : '') + 'Page not found'
+    link(rel='icon' href='/img/weather.png')
     link(rel='stylesheet' href='/css/styles.css')
   body
-    include ../includes/header
-    p Please click one of the links above and return to safety
+    div.main-content
+      include ../includes/header
+      p Please click one of the links above and return to safety
     include ../includes/footer
+    link(rel='icon' href='/img/weather.png')

@@ -1,8 +1,10 @@
 html
   head
     title Help
+    link(rel='icon' href='/img/weather.png')
     link(rel='stylesheet' href='/css/styles.css')
   body
-    include ../includes/header
-    p Age #{age}
+    div.main-content
+      include ../includes/header
+      p Age #{age}
     include ../includes/footer

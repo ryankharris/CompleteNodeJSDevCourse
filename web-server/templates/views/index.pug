@@ -2,7 +2,9 @@ html
   head
     title= title
     link(rel='stylesheet' href='/css/styles.css')
+    link(rel='icon' href='/img/weather.png')
     script(src="/js/app.js") 
   body
-    include ../includes/header
+    div.main-content
+      include ../includes/header
     include ../includes/footer

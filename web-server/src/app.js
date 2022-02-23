@@ -19,11 +19,11 @@ app.set('views', viewsPath); // leaving it default is fine, so this isn't necess
 app.use(express.static(publicPath));
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Welcome', headerMsg: "Welcome Page (thanks to Pug)", name: myName });
+  res.render('index', { title: 'Welcome', headerMsg: "Welcome", name: myName });
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', { title: 'About', headerMsg: "About Page (thanks to Pug)", name: myName });
+  res.render('about', { title: 'About', headerMsg: "About", name: myName });
 });
 
 app.get('/about/*', (req, res) => {
@@ -31,7 +31,7 @@ app.get('/about/*', (req, res) => {
 });
 
 app.get('/help', (req, res) => {
-  res.render('help', { headerMsg: "Help Page (thanks to Pug)", name: myName, age });
+  res.render('help', { headerMsg: "Help", name: myName, age });
 });
 
 app.get('/help/*', (req, res) => {
@@ -39,14 +39,32 @@ app.get('/help/*', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
+  if (!req.query.address) {
+    res.status(400).send({
+      error: 'You must provide an "address" query param.'
+    });
+    return;
+  }
   res.send({
     forecast: 'It is raining',
-    location: 'Near Portland Oregon',
+    location: req.query.address,
   });
 });
 
 app.get('/weather/*', (req, res) => {
   res.status(404).render('notFound', {parentRoute: 'Weather', headerMsg: '404: Weather page not found', name: myName});
+});
+
+app.get('/products', (req, res) => {
+  if (!req.query.search) {
+    res.status(400).send({
+      error: 'You must provide a "search" query param.'
+    });
+    return;
+  }
+  res.send({
+    products: []
+  });
 });
 
 app.get('*', (req, res) => {
