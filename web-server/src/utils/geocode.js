@@ -2,7 +2,7 @@
 
 
 const request = require('postman-request');
-const config = require('../../config.json');
+const config = require('../../../config.json');
 const json = true;
 
 // const extractGeoData = (data) => {
@@ -27,12 +27,10 @@ const geocode = (location, callback) => { // returns {lon, lat, place}
   const encodeLocation = encodeURI(location);
   const mapboxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeLocation}.json?limit=1&access_token=${config['weather-app'].mapbox.access_token}`;
   request({ url: mapboxUrl, json }, (error, response) => {
-  // request({ url: mapboxUrl, json }, (error, {body: {features}}) => { // this line is problematic when your net-connection is down
     if (error) {
       callback('An error occurred trying to get longitude and latitude info. Sorry.', undefined);
       return;
     } else if (!response.body.features || response.body.features.length === 0) {
-    // } else if (!features || features.length === 0) {
       callback('No results found. Please revise your search location.', undefined);
       return;
     }

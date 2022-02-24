@@ -1,6 +1,8 @@
 
 const express = require('express');
 const path = require('path');
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
 const app = express();
 const PORT = 3000;
@@ -38,17 +40,53 @@ app.get('/help/*', (req, res) => {
   res.status(404).render('notFound', {parentRoute: 'Help', headerMsg: '404: Help page not found', name: myName});
 });
 
-app.get('/weather', (req, res) => {
+const geocodeHelper = async (location) => {
+  return new Promise((resolve, reject) => {
+    geocode(location, (error, {lon, lat, place} = {}) => {
+      if (error) {
+        // console.log('geocode error:', error);
+        reject(error);
+        return;
+      }
+    
+      forecast(lon, lat, (error, data) => {
+        if (error) {
+          console.log('forecast error:', error);
+          reject(error);
+          return;
+        }
+        resolve({
+          place,
+          lon,
+          lat,
+          data
+        });
+      });
+    });
+  });
+};
+
+app.get('/weather', async (req, res) => {
   if (!req.query.address) {
     res.status(400).send({
       error: 'You must provide an "address" query param.'
     });
     return;
   }
-  res.send({
-    forecast: 'It is raining',
-    location: req.query.address,
-  });
+
+  let result;
+  try {
+    result = await geocodeHelper(req.query.address);
+    res.send({
+      forecast: result.data,
+      location: `${result.place} at lon: ${result.lon} / lat: ${result.lat}`,
+    });
+  } catch (err) {
+    res.status(500).send({
+      error: err
+    });
+  }
+
 });
 
 app.get('/weather/*', (req, res) => {

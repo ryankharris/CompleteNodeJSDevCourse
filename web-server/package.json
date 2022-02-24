@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",
+    "postman-request": "^2.88.1-postman.31",
     "pug": "^3.0.2"
   }
 }
