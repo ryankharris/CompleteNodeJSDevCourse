@@ -44,7 +44,6 @@ const geocodeHelper = async (location) => {
   return new Promise((resolve, reject) => {
     geocode(location, (error, {lon, lat, place} = {}) => {
       if (error) {
-        // console.log('geocode error:', error);
         reject(error);
         return;
       }
