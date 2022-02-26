@@ -54,3 +54,16 @@ nav ul li a {
 nav ul li a:hover {
   color: blue;
 }
+
+.address-input {
+  border: 1px solid #cccccc;
+  padding: 8px;
+}
+
+.search-btn {
+  cursor: pointer;
+  border: 1px solid #888888;
+  background: #888888;
+  color: white;
+  padding: 8px;
+}

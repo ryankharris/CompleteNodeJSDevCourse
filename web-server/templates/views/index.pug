@@ -9,7 +9,9 @@ html
       include ../includes/header
       p Use this site to get your weather
       form
-        input(placeholder="Address")
-        button Search
+        input.address-input(placeholder="Address")
+        button.search-btn Search
+      p#msg-1
+      p#msg-2
     include ../includes/footer
     script(src="/js/extra.js")
