@@ -1,17 +1,7 @@
-#!/usr/bin/env node
 
 const request = require('postman-request');
-const config = require('../../../config.json');
 const json = true;
 
-// const extractWeatherData = (allData) => {
-//   return {
-//     currentTemp: allData.current.temperature,
-//     feelsLikeTemp: allData.current.feelslike,
-//     chanceOfRain: allData.current.precip,
-//     description: allData.current.weather_descriptions[0]
-//   };
-// }; // end extractWeatherData
 const extractWeatherData = ({current: {temperature, feelslike, precip, weather_descriptions}}) => {
   return {
     currentTemp: temperature,
@@ -27,7 +17,7 @@ const forecast = (longitude, latitude, callback) => {
     callback('Invalid argument.', undefined);
     return;
   }
-  const weatherstackUrl = `http://api.weatherstack.com/current?access_key=${config['weather-app'].weatherstack.access_key}&query=${latitude.toString()},${longitude.toString()}=&units=f`;
+  const weatherstackUrl = `http://api.weatherstack.com/current?access_key=${process.env.WEATHERSTACK_ACCESS_KEY}&query=${latitude.toString()},${longitude.toString()}=&units=f`;
   request({ url: weatherstackUrl, json }, (error, response, body) => {
     if (error) {
       callback('An error occurred trying to get weather info. Sorry.', undefined);
