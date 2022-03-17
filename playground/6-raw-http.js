@@ -1,9 +1,17 @@
 #!/usr/bin/env node
 
-const http = require('http');
-const config = require('../config.json');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
-const weatherstackUrl = `http://api.weatherstack.com/current?access_key=${config['weather-app'].weatherstack.access_key}&query=45,-75=&units=f`;
+if (!process.env.WEATHERSTACK_ACCESS_KEY) {
+  console.log('Error: Weatherstack access key was not provided to the environment. Exiting.');
+  process.exit(0);
+}
+
+const http = require('http');
+
+const weatherstackUrl = `http://api.weatherstack.com/current?access_key=${process.env.WEATHERSTACK_ACCESS_KEY}&query=45,-75=&units=f`;
 
 // error version, creates error from the service
 // const weatherstackUrl = `http://api.weatherstack.com/current?access_key=123&query=45,-75=&units=f`;

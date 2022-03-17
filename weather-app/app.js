@@ -1,5 +1,19 @@
 #!/usr/bin/env node
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+if (!process.env.WEATHERSTACK_ACCESS_KEY) {
+  console.log('Error: Weatherstack access key was not provided to the environment. Exiting.');
+  process.exit(0);
+}
+
+if (!process.env.MAPBOX_ACCESS_TOKEN) {
+  console.log('Error: Mapbox access key was not provided to the environment. Exiting.');
+  process.exit(0);
+}
+
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 

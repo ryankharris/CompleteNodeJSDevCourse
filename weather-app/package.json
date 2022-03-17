@@ -12,5 +12,8 @@
   "dependencies": {
     "nodemon": "^2.0.15",
     "postman-request": "^2.88.1-postman.30"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0"
   }
 }
