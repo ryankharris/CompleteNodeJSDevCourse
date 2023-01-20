@@ -10,7 +10,8 @@ weatherForm.addEventListener('submit', async (event) => {
   
   const searchInput = document.querySelector('input');
   const value = searchInput.value;
-  const weatherPath = `http://localhost:3000/weather?address=${value}`;
+  // const weatherPath = `http://localhost:3000/weather?address=${value}`;
+  const weatherPath = `/weather?address=${value}`;
   const response = await fetch(weatherPath);
   const data = await response.json();
   if (data.error) {

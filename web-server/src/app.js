@@ -19,7 +19,7 @@ const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const myName = 'Ryan Harris';
 const age = 99;
 
